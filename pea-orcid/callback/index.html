@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Don't send this page's address (which carries ORCID's one-time code) to anyone, and keep it out of search -->
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Returning to PEA</title>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f7f5f5; color: #1e1a1b;
+           font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    main { max-width: 32rem; padding: 2rem; text-align: center; }
+    a { color: #8c2433; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Returning you to PEA…</h1>
+    <p>If nothing happens, <a id="continue" href="http://localhost:5173/profile">continue to PEA</a>.</p>
+    <p><small>Development helper: ORCID only accepts https addresses, so it sends you here and this page forwards
+      you to PEA running on this computer. It always forwards to the same address and stores nothing.</small></p>
+  </main>
+  <script>
+    // Forward ORCID's answer (?code=…&state=… or ?error=…) to PEA's callback. The target is fixed, so this page
+    // can't be used to send anyone anywhere else.
+    var target = "http://localhost:5173/api/v1/orcid/callback" + window.location.search;
+    document.getElementById("continue").href = target;
+    window.location.replace(target);
+  </script>
+</body>
+</html>
